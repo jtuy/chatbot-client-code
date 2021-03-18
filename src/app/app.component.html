@@ -4,7 +4,7 @@
       Welcome to {{ title }}!
     </h1>
     <div id="main">
-      <div class="chatbox">
+      <div class="chatbox" #scrollMe>
         <div *ngFor="let item of messageArray">
         <span>{{item.name}}: </span> {{item.message}}
         </div>

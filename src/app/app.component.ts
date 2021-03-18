@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { SocketService } from './socket.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { SocketService } from './socket.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  @ViewChild('scrollMe', {static: false}) private myChatBox: ElementRef;
   title = 'Chatbot';
   messageArray = [];
   synth:any;
@@ -27,6 +28,10 @@ export class AppComponent implements OnInit {
     this.speak(outputMessage);
   }
 
+  ngAfterViewChecked() {        
+    this.scrollToBottom();        
+  }
+  
   sendMessage(){
     const data = { patientId: "3516", message:this.message };
     this.socketService.sendMessage(data);
@@ -34,14 +39,19 @@ export class AppComponent implements OnInit {
     this.message = '';
   }
 
- speak(string) {
-  let u = new SpeechSynthesisUtterance(string);
-  u.text = string;
-  u.lang = "en-US";
-  u.volume = 1; //0-1 interval
-  u.rate = 1;
-  u.pitch = 1; //0-2 interval
-  this.synth.speak(u);
-}
+  speak(string) {
+    let u = new SpeechSynthesisUtterance(string);
+    u.text = string;
+    u.lang = "en-US";
+    u.volume = 1; //0-1 interval
+    u.rate = 1;
+    u.pitch = 1; //0-2 interval
+    this.synth.speak(u);
+  }
 
+  scrollToBottom(): void {
+    try {
+        this.myChatBox.nativeElement.scrollTop = this.myChatBox.nativeElement.scrollHeight;
+    } catch(err) { }                 
+  }
 }
