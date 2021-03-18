@@ -5,8 +5,8 @@ import * as io from 'socket.io-client';
 @Injectable()
 export class SocketService {
 
-  // private socket = io('http://127.0.0.1:8000');
   private socket = io('https://plaid-different-danger.glitch.me');
+  // private socket = io('http://127.0.0.1:8000');
   constructor() { }
 
   sendMessage(data) {

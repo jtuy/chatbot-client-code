@@ -7,7 +7,7 @@ import { SocketService } from './socket.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Daisy Barnes';
+  title = 'Chatbot';
   messageArray = [];
   synth:any;
   voices:any;
@@ -22,13 +22,15 @@ export class AppComponent implements OnInit {
       this.messageArray.push({name:'Chatbot', message: data.outputMessage});
       this.speak(data.outputMessage);
     });
-
+    let outputMessage = "Hi Cynthia, I'm your health care spending navigator. I can provide you with information about your claims. You can ask me like... \nShow my latest claims \nShow my claims with provider FiveLakesHealthSystem \nShow my claim details on 2020-12-18";
+    this.messageArray.push({name:'Chatbot', message: outputMessage});
+    this.speak(outputMessage);
   }
 
   sendMessage(){
-    const data = { message:this.message };
+    const data = { patientId: "3516", message:this.message };
     this.socketService.sendMessage(data);
-    this.messageArray.push({name:'Daisy', message:this.message});
+    this.messageArray.push({name:'Cynthia', message:this.message});
     this.message = '';
   }
 

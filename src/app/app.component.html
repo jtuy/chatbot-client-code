@@ -1,17 +1,18 @@
 <div class="body">
-<div class="content"> 
-   <h1>
-    Welcome {{ title }}!
-  </h1>
-  <div id="main">
-    <div class="chatbox">
-      <div *ngFor="let item of messageArray">
-      <span>{{item.name}}: </span> {{item.message}}
+  <div class="content"> 
+     <h1>
+      Welcome to {{ title }}!
+    </h1>
+    <div id="main">
+      <div class="chatbox">
+        <div *ngFor="let item of messageArray">
+        <span>{{item.name}}: </span> {{item.message}}
+        </div>
       </div>
+      <div><input id="input" type="text" placeholder="Please type your question" autocomplete="off" [(ngModel)]='message' (keyup.enter)="sendMessage()"/></div>
     </div>
-    <div><input id="input" type="text" placeholder="Please type your question" autocomplete="off" [(ngModel)]='message' (keyup.enter)="sendMessage()"/></div>
+    
   </div>
   
-</div>
-
-</div>
+  </div>
+  
